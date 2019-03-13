@@ -3,8 +3,10 @@
 ## Summary: the pipeline in one go
 
 ```
-# for some certificate e.g. ./Y1vTOT_M9475iEK4qDNIlUnlneM.cer
-./readwhichopenssl.py ./Y1vTOT_M9475iEK4qDNIlUnlneM.cer | \
+# for some repository..
+rsync --delete -az rpki.cnnic.cn::rpki cnnic
+# for some certificate e.g. Y1vTOT_M9475iEK4qDNIlUnlneM.cer
+./readwhichopenssl.py ./cnnic/A9162E3D0000/Y1vTOT_M9475iEK4qDNIlUnlneM.ce | \
 ./delegfilter.py -s, -t cc,orgid -n 3 | \
 cut -d, -f6 | sort | uniq -c | sort -nr 
 ```
@@ -29,12 +31,12 @@ by hand:
         -inform DER \
         -noout \
         -text \
-        -in ./Y1vTOT_M9475iEK4qDNIlUnlneM.cer
+        -in ./cnnic/A9162E3D0000/Y1vTOT_M9475iEK4qDNIlUnlneM.cer
 ```
 
 scripted:
 
-```./readwhichopenssl.py ./Y1vTOT_M9475iEK4qDNIlUnlneM.cer \
+```./readwhichopenssl.py .cnnic/A9162E3D0000/Y1vTOT_M9475iEK4qDNIlUnlneM.cer \
         > ./Y1vTOT_M9475iEK4qDNIlUnlneM.inr.txt
 ```
 This generates data of the form:
